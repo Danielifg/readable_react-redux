@@ -7,6 +7,7 @@ export const fetchCommentsById = (id) => dispatch =>(
     getCommentById(id)
     .then(comments => dispatch({
       type: FETCH_COMMENTS,
+      id,
       comments
     }))
 );

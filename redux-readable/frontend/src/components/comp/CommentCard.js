@@ -2,14 +2,15 @@ import React, {Component} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 
 class CommentCard extends Component {
-
+constructor(props){
+  super(props);
+}
 
   render(){
     const { comments } = this.props
     const fixComment ={
       padding:'8px'
     }
-
     return(
     <div>
       {comments.map(i=>{

@@ -9,7 +9,7 @@ const headers = Request.headers;
 export const getCommentById = (id) =>
   fetch(`${Request.api}/posts/${id}/comments`, {headers})
   .then(res => res.json())
-  .then(res => console.log(res))
+
 
 
 

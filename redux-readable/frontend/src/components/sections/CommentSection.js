@@ -6,42 +6,48 @@ import { fetchCommentsById } from '../../actions';
 
 
 class CommentSection extends Component {
-  state ={
-      initComments:[]
-  }
-
   componentDidMount(){
-    console.log(this.props.idForInitComments)
+    // this idForInitComments its not getting the value as from concole.log() on line 32
+    // I want to show in the first view the comments of first post in the posts Array
+    this.props.fetchCommentsById(this.props.idForInitComments);
 }
 
 render(){
 
-  const { posts } = this.props;
-  const { initComments } = this.state;
-  //console.log(initComments)
+  const { comments } = this.props;
+  console.log(this.props)
+
     return(
        <RB.Col xsHidden md={4}>
-        <CommentCard comments={ initComments }/>
+
       </RB.Col>
     )
  }
 }
-function mapStateToProps(state) {
 
-    return {
-        idForInitComments: state.posts.idForInitComments,
-        initComments: state.comments
+function mapStateToProps({ comments , posts}) {
+
+ console.log(comments)
+ console.log(posts)
+ console.log(posts.idForInitComments)
+return {
+
+        idForInitComments: posts.idForInitComments,
+        comments: comments
       }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        fetchCommentsById: (id) => dispatch(fetchCommentsById(id))
+        fetchCommentsById: () => dispatch(fetchCommentsById())
     }
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(CommentSection);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (CommentSection);
 
 //export default CommentSection;
 //import { CardHeader} from 'material-ui/ CardActions, CardHeader, CardText ';

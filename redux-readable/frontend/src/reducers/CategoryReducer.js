@@ -8,7 +8,6 @@ function categories (state = initialCategoriesState, action) {
     switch (action.type) {
         case LOAD_CATEGORIES:
               return {
-                ...state,
                 categories: action.categories
             };
         // case SELECT_CATEGORY:
