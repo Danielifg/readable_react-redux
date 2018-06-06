@@ -5,39 +5,41 @@ import 'semantic-ui-css/semantic.min.css';
 import { fetchPosts } from '../../actions';
 import { connect } from 'react-redux';
 import CommentSection from './CommentSection';
-import PostCard from '../comp/PostCard';
+import PostCard from '../comp/PostCard'
+import { fetchCommentsById } from '../../actions'
 
 
 class PostSection extends Component{
 
-componentDidMount(){
-  const { posts } = this.props
-  this.props.fetchPosts();
-}
+ constructor(props){
+      super(props);
+        this.props.fetchPosts();
+    }
 
-  render(){
-const { posts } = this.props
-    return(
-    <div>
-          <RB.Col xs={6} md={4}>
-            <PostCard posts={ posts } />
-          </RB.Col>
-    </div>
+render(){
+
+      return(
+      <div>
+            <RB.Col xs={6} md={4}>
+              <PostCard posts={ this.props.posts } />
+            </RB.Col>
+            <CommentSection />
+      </div>
     )
   }
 }
 
 
-function mapStateToProps({posts}){
+function mapStateToProps({posts,comments}){
 
   return{
-    posts: posts.posts
-    //initComments: post.post
+    posts: posts.posts,
+    comments: comments
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return {
+   return {
     fetchPosts: () => dispatch(fetchPosts())
   }
 }

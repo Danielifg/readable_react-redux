@@ -10,7 +10,6 @@ import Book from 'react-icons/lib/fa/book'
 
 import CategorySection from './sections/CategorySection';
 import PostSection from './sections/PostSection';
-import CommentSection from './sections/CommentSection'
 import DetailPost from './comp/DetailPost';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -49,7 +48,6 @@ return (
       <RB.Row className="show-grid">
           <CategorySection/>
           <PostSection/>
-          <CommentSection/>
       </RB.Row>
     </RB.Grid>
   </div>
