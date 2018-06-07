@@ -7,22 +7,20 @@ import { fetchCommentsById } from '../../actions';
 
 class CommentSection extends Component {
 
+
 componentDidUpdate(){
   this.props.fetchCommentsById(this.props.idForInitComments);
 }
 
 render(){
-  const { comments } = this.props
-  if(this.props.isFetching || this.props.error){
-    return <div> null </div>
-  }else{
-    return(
-       <RB.Col xsHidden md={4}>
+
+  return(
+        <div>
+        <RB.Col xsHidden md={4}>
                 <CommentCard />
-      </RB.Col>
-    )
-   }
-  }
+          </RB.Col>
+       </div>
+  )  }
 }
 
 function mapStateToProps(state) {
@@ -32,7 +30,7 @@ function mapStateToProps(state) {
         data: state.data,
         error: state.error
       }
-}
+  }
 
 function mapDispatchToProps (dispatch) {
     return {

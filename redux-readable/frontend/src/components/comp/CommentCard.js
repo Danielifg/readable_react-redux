@@ -9,53 +9,55 @@ constructor(props){
 
 }
 
-componentWillMount(){
-console.log(this.props.data)
-}
-
-componentWillUpdate(){
-console.log(this.props.data)
-}
-
-componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-}
-
-componentDidUpdate(){
-  console.log(this.props.data)
-}
-componentDidUpdate(){
-
-    console.log(this.props.data)
-}
-
   render(){
-    console.log(this.props.data)
+    console.log(this.props)
     const fixComment ={
       padding:'8px'
     }
 
-    return(
-
-    <div>
-
-      Works!
-    </div>
-    )
+    if(this.props.comments != null){
+      return(
+      <div>
+      {this.props.comments.map(i=>{
+          return(
+            <div key={i.id} class="ui card">
+              <div class="content">
+                <div>{i.author}</div>
+                <div class="right floated meta">{i.timestamp}</div>
+              </div>
+              <div class="image">
+                <p style={fixComment}>{i.body}</p>
+              </div>
+              <div class="content">
+                <span class="right floated">
+                  <i class="heart outline like icon"></i>
+                  {i.voteScore}
+                </span>
+              </div>
+              <div class="extra content">
+                <div class="ui large transparent left icon input">
+                  <i class="heart outline icon"></i>
+                  <input type="text" placeholder="Add Comment..."></input>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      )
+    }else{
+      return null
+    }
   }
 }
 //export default CommentCard;
 
-function mapStateToProps(state) {
+function mapStateToProps({comments}) {
     return {
-      isFetching: state.isFetching,
-      data: state.payload,
-      error: state.error
+      isFetching: comments.isFetching,
+      comments: comments.comments,
+      error: comments.error
       }
 }
 
-
-export default connect(
-  mapStateToProps,
-  null)
-  (CommentCard);
+export default connect(mapStateToProps)(CommentCard);

@@ -4,20 +4,30 @@ import {
   FETCH_COMMENTS_FAILURE
 } from '../actions';
 
-export const comments = (state = initialState, action) => {
+const comments = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_COMMENTS_ACTIVE':
         case 'FETCH_COMMENTS_FAILURE':
-        return { ...state, isFetching: action.isFetching, error: action.error };
+        return {
+            ...state,
+            isFetching: action.isFetching,
+            error: action.error
+          };
 
         case 'FETCH_COMMENTS_SUCCESS':
-        return { ...state, data: action.payload, isFetching: action.isFetching,
-                 error: null };
+        return {
+            ...state,
+            comments: action.payload,
+            isFetching: action.isFetching,
+                 error: null
+               };
+
         default:return state;
     }
 };
 const initialState = {
-    data:null,
+    comments:null,
     isFetching:false,
     error:null
   };
+export default comments;

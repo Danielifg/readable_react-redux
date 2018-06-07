@@ -21,12 +21,12 @@ export const fetchCommentsById = id => dispatch =>{
         payload:comments
       });
   })
-  .catch(err => {
-    dispatch({
-      type:'FETCH_ACTIVE_PLAYER_FAILURE',
-      isFetching: false,
-      error: err
-    });
-    console.log('Failure: ', err);
-  });
-};
+  // .catch(err => {
+  //   dispatch({
+  //     type:'FETCH_ACTIVE_PLAYER_FAILURE',
+  //     isFetching: false,
+  //     error: err
+  //   });
+  //   console.log('Failure: ', err);
+  // });
+} ;
