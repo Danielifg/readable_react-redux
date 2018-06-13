@@ -5,6 +5,7 @@ import CommentCard from '../comp/CommentCard';
 import { fetchCommentsById } from '../../actions';
 
 
+
 class CommentSection extends Component {
 
 
@@ -13,12 +14,10 @@ componentDidUpdate(){
 }
 
 render(){
-
+  const { comments } = this.props;
   return(
         <div>
-        <RB.Col xsHidden md={4}>
-                <CommentCard />
-          </RB.Col>
+          <CommentCard/>
        </div>
   )  }
 }

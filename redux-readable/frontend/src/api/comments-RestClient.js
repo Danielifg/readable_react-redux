@@ -1,4 +1,5 @@
 import * as Request from './http-header.js'
+import uuid from 'uuid';
 
 const headers = Request.headers;
 
@@ -33,25 +34,27 @@ export const getCommentByParent = (parentId) =>
  * Add comment to db[]
  * "comments.js/add"
  */
-export const addComment = (comment) =>
-  fetch(`${Request.api}/comment`, {
-    method: 'POSTT',
-    headers: {
-      ...Request.headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      comment
-    })
-  }).then(res => res.json())
-  .then(data => data.comments)
+
+   export const createComment = (comment) =>
+       fetch(`${Request.api}/comments`, {
+           method: 'POST',
+           headers: {
+               ...headers,
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+               ...comment,
+               id: uuid(),
+               timestamp: Date.now()
+           })
+       }).then(res => res.json())
 
 /**
  * Add comment to db[]
  * "comments.js/vote"
  */
-export const vote = (id, option) =>
-  fetch(`${Request.api}/${id}/${option}`, {
+export const voteComment = (id, option) =>
+  fetch(`${Request.api}/comments/${id}`, {
     method: 'POST',
     headers: {
       ...Request.headers,
@@ -61,7 +64,7 @@ export const vote = (id, option) =>
       option
     })
   }).then(res => res.json())
-  .then(data => data.comments)
+
 
 
 /**
@@ -80,37 +83,21 @@ export const disableByParent = (post) =>
     })
   }).then(res => res.json())
 
+  export const editComment = (id, body) =>
+      fetch(`${Request.api}/comments/${id}`, {
+          method: 'PUT',
+          headers: {
+              ...headers,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              body,
+              timestamp: Date.now()
+          })
+      }).then(res => res.json())
 
-/**
- * Disable comment directly
- * "comments.js/disable"
- */
-export const disable = (id) =>
-  fetch(`${Request.api}/${id}`, {
-    method: 'PUT',
-    headers: {
-      ...Request.headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id
-    })
-  }).then(res => res.json())
-
-
-
-/**
- * Disable comment directly
- * "comments.js/edit"
- */
-export const edit = (id) =>
-  fetch(`${Request.api}/${id}`, {
-    method: 'POST',
-    headers: {
-      ...Request.headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id
-    })
-  }).then(res => res.json())
+  export const deleteComment = (id) =>
+      fetch(`${Request.api}/comments/${id}`, {
+          method: 'DELETE',
+          headers
+      })

@@ -6,28 +6,127 @@ import {
 import {
    LOAD_POSTS,
    SELECT_CATEGORY,
-   FETCH_COMMENTS,
+   SELECT_POST,
+   EDIT_POST,
+   CREATE_POST,
+   DELETE_POST,
+   SORT_POSTS_BY_UP_VOTES,
+   SORT_POSTS_BY_DOWN_VOTES,
+   SORT_POSTS_BY_TIME,
+   fetchPostDetails,
+   sortPostByUpVotes,
+   sortPostByDownVotes,
+   sortPostsByTime,
    fetchPosts,
-   fetchPostsByCategory
+   fetchPostsByCategory,
+   deleteExistingPost,
+   createNewPost,
+   editExistingPost
  } from './PostsActions';
+
+
+import {
+  UP_VOTE_POST,
+  DOWN_VOTE_POST,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT,
+  upVotePost,
+  downVotePost,
+  upVoteComment,
+  downVoteComment,
+  upVote
+}from './VoteAction'
 
 import {
   fetchCommentsById,
-  FETCH_COMMENTS_ACTIVE,
-  FETCH_COMMENTS_SUCCESS,
-  FETCH_COMMENTS_FAILURE
-} from './CommentActions';
-
-export {
-  LOAD_POSTS,
-  LOAD_CATEGORIES,
-  SELECT_CATEGORY,
-  FETCH_COMMENTS,
+  createNewComment,
+  editExistingComment,
+  deleteExistingComment,
   FETCH_COMMENTS_ACTIVE,
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILURE,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  EDIT_COMMENT
+} from './CommentActions';
+
+import{
+  OPEN_POST_DIALOG,
+  CLOSE_POST_DIALOG,
+  HANDLE_POST_DIALOG_CHANGE,
+  OPEN_EDIT_POST_DIALOG,
+  OPEN_COMMENT_DIALOG,
+  CLOSE_COMMENT_DIALOG,
+  HANDLE_COMMENT_DIALOG_CHANGE,
+  OPEN_EDIT_COMMENT_DIALOG,
+  CLOSE_SNACKBAR,
+  openPostDialog,
+  closePostDialog,
+  handlePostDialogChange,
+  openEditPostDialog,
+  openCommentDialog,
+  closeCommentDialog,
+  handleCommentDialogChange,
+  openEditCommentDialog,
+  closeSnackbar
+} from './DialogActions'
+
+export {
+  LOAD_POSTS,
+  EDIT_POST,
+  CREATE_POST,
+  DELETE_POST,
+  UP_VOTE_POST,
+  DOWN_VOTE_POST,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT,
+  LOAD_CATEGORIES,
+  SELECT_CATEGORY,
+  FETCH_COMMENTS_ACTIVE,
+  FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_FAILURE,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  EDIT_COMMENT,
+  SORT_POSTS_BY_UP_VOTES,
+  SORT_POSTS_BY_DOWN_VOTES,
+  SORT_POSTS_BY_TIME,
+  SELECT_POST,
+  fetchPostDetails,
   fetchCategories,
   fetchPosts,
   fetchPostsByCategory,
-  fetchCommentsById
+  fetchCommentsById,
+  createNewComment,
+  editExistingComment,
+  deleteExistingComment,
+  editExistingPost,
+  createNewPost,
+  deleteExistingPost,
+  sortPostByUpVotes,
+  sortPostByDownVotes,
+  sortPostsByTime,
+  upVotePost,
+  downVotePost,
+  upVoteComment,
+  downVoteComment,
+
+  OPEN_POST_DIALOG,
+  CLOSE_POST_DIALOG,
+  HANDLE_POST_DIALOG_CHANGE,
+  OPEN_EDIT_POST_DIALOG,
+  OPEN_COMMENT_DIALOG,
+  CLOSE_COMMENT_DIALOG,
+  HANDLE_COMMENT_DIALOG_CHANGE,
+  OPEN_EDIT_COMMENT_DIALOG,
+  CLOSE_SNACKBAR,
+  openPostDialog,
+  closePostDialog,
+  handlePostDialogChange,
+  openEditPostDialog,
+  openCommentDialog,
+  closeCommentDialog,
+  handleCommentDialogChange,
+  openEditCommentDialog,
+  closeSnackbar
 }

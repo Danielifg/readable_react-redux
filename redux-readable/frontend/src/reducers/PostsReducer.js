@@ -1,6 +1,14 @@
 import{
   LOAD_POSTS,
-  SELECT_CATEGORY
+  SELECT_CATEGORY,
+  EDIT_POST,
+  CREATE_POST,
+  DELETE_POST,
+  UP_VOTE_POST,
+  DOWN_VOTE_POST,
+  SORT_POSTS_BY_UP_VOTES,
+  SORT_POSTS_BY_DOWN_VOTES,
+  SORT_POSTS_BY_TIME,
 } from '../actions';
 
 function posts (state = initialPostsState, action){
@@ -12,10 +20,63 @@ function posts (state = initialPostsState, action){
           posts: sortPostsBy(action.posts, SORT_BY_UP)
         };
     case SELECT_CATEGORY:
-         return {
+      let id = null;
+      if(action.posts.length > 0){
+        id = action.posts[0].id
+      }
+    return {
            sortBy: SORT_BY_UP,
+           idForInitComments: id,
             posts: sortPostsBy(action.posts, SORT_BY_UP)
           };
+          case CREATE_POST:
+                  return {
+                      ...state,
+                      sortBy: SORT_BY_LATEST,
+                      posts: sortPostsBy(
+                          state.posts.concat(action.newPost),
+                          SORT_BY_LATEST)
+                  };
+              case EDIT_POST:
+                  return {
+                      ...state,
+                      sortBy: SORT_BY_LATEST,
+                      posts: sortPostsBy(
+                          state.posts
+                              .filter(post => post.id !== action.post.id)
+                              .concat(action.post),
+                          SORT_BY_LATEST)
+                  };
+              case DELETE_POST:
+                  return {
+                      ...state,
+                      posts: state.posts.filter(post => post.id !== action.id)
+                  }
+              case UP_VOTE_POST:
+              case DOWN_VOTE_POST:
+                  return {
+                      ...state,
+                      posts: sortPostsBy(
+                          state.posts
+                              .filter(post => post.id !== action.post.id)
+                              .concat(action.post),
+                          state.sortBy)
+                  }
+              case SORT_POSTS_BY_UP_VOTES:
+                  return {
+                      sortBy: SORT_BY_UP,
+                      posts: sortPostsBy(state.posts, SORT_BY_UP)
+                  };
+              case SORT_POSTS_BY_DOWN_VOTES:
+                  return {
+                      sortBy: SORT_BY_DOWN,
+                      posts: sortPostsBy(state.posts, SORT_BY_DOWN)
+                  };
+              case SORT_POSTS_BY_TIME:
+                  return {
+                      sortBy: SORT_BY_LATEST,
+                      posts: sortPostsBy(state.posts, SORT_BY_LATEST)
+                  };
      default:
         return state;
   }

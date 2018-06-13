@@ -2,17 +2,14 @@ import React, {Component} from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { fetchCommentsById } from '../../actions';
 import { connect } from 'react-redux';
+import CommentControl from '../controllers/CommentControl';
 
 class CommentCard extends Component {
-constructor(props){
-  super(props);
-
-}
 
   render(){
-    console.log(this.props)
     const fixComment ={
-      padding:'8px'
+      padding:'8px',
+      margin:'0px auto'
     }
 
     if(this.props.comments != null){
@@ -20,25 +17,22 @@ constructor(props){
       <div>
       {this.props.comments.map(i=>{
           return(
-            <div key={i.id} class="ui card">
-              <div class="content">
+            <div key={i.id} className="ui card" style={fixComment}>
+              <div className="content">
                 <div>{i.author}</div>
-                <div class="right floated meta">{i.timestamp}</div>
+                <div className="right floated meta">{i.timestamp}</div>
               </div>
-              <div class="image">
+              <div className="image">
                 <p style={fixComment}>{i.body}</p>
               </div>
-              <div class="content">
-                <span class="right floated">
-                  <i class="heart outline like icon"></i>
+              <div className="content">
+                <span className="right floated">
+                  <i className="heart outline like icon"></i>
                   {i.voteScore}
                 </span>
               </div>
-              <div class="extra content">
-                <div class="ui large transparent left icon input">
-                  <i class="heart outline icon"></i>
-                  <input type="text" placeholder="Add Comment..."></input>
-                </div>
+              <div className="extra content">
+                  <CommentControl  commentId={i.id} comment={i}/>
               </div>
             </div>
           )
@@ -50,14 +44,16 @@ constructor(props){
     }
   }
 }
-//export default CommentCard;
 
 function mapStateToProps({comments}) {
     return {
       isFetching: comments.isFetching,
-      comments: comments.comments,
-      error: comments.error
+      error: comments.error,
+      comments:comments.comments
       }
 }
 
-export default connect(mapStateToProps)(CommentCard);
+export default connect(
+  mapStateToProps,
+  null
+)(CommentCard);

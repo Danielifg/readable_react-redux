@@ -22,9 +22,9 @@ render(){
     const { selectPost } = this.props
     const categories = this.props.categories || [];
    return(
-       <RB.Col xs={6} md={4}>
+
                 <CategoryCard categories={categories} />
-      </RB.Col>
+    
     )
   }
 }

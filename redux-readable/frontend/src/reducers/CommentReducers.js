@@ -1,7 +1,10 @@
 import {
   FETCH_COMMENTS_ACTIVE,
   FETCH_COMMENTS_SUCCESS,
-  FETCH_COMMENTS_FAILURE
+  FETCH_COMMENTS_FAILURE,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  EDIT_COMMENT
 } from '../actions';
 
 const comments = (state = initialState, action) => {
@@ -21,13 +24,39 @@ const comments = (state = initialState, action) => {
             isFetching: action.isFetching,
                  error: null
                };
-
-        default:return state;
-    }
-};
+         case 'CREATE_COMMENT':
+          let existingComments = state[action.comment.parentId] || [];
+          return {
+               ...state,
+              [action.comment.parentId]: existingComments.concat(action.comment)
+              }
+              case 'UP_VOTE_COMMENT':
+              case 'DOWN_VOTE_COMMENT':
+              case 'EDIT_COMMENT':
+                  existingComments = state[action.comment.parentId] || [];
+                  return {
+                      ...state,
+                      [action.comment.parentId]: existingComments
+                          .filter(comment => comment.id !== action.comment.id)
+                          .concat(action.comment)
+                          .sort((a, b) => {
+                              return a.timestamp - b.timestamp;
+                          })
+                  }
+              case 'DELETE_COMMENT':
+                  existingComments = state[action.postId] || []
+                  return {
+                      ...state,
+                      [action.postId]: existingComments
+                    }
+                    default:
+                        return state;
+          };
+}
 const initialState = {
     comments:null,
     isFetching:false,
     error:null
   };
+
 export default comments;

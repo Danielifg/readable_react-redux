@@ -20,10 +20,7 @@ render(){
 
       return(
       <div>
-            <RB.Col xs={6} md={4}>
               <PostCard posts={ this.props.posts } />
-            </RB.Col>
-            <CommentSection />
       </div>
     )
   }
