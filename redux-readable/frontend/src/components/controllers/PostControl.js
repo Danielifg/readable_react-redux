@@ -18,7 +18,8 @@ import {
 
   render(){
 
-  const {   postId,
+  const {
+            postId,
             deleteExistingPost,
             openEditPostDialog,
             upVotePost,
@@ -27,7 +28,7 @@ import {
             post
         } = this.props
 
-        const fabStyle = {
+const fabStyle = {
     margin: 0,
     top: 'auto',
     right: 20,
@@ -39,11 +40,11 @@ import {
 
   return(
     <div>
-      <span class="left floated like">
+      <span className="left floated like">
           <Trash size={24} onClick={() => deleteExistingPost(postId)} />
           <EditIcon size={24} onClick={() => openEditPostDialog(post)} />
       </span>
-      <span class="right floated star">
+      <span className="right floated star">
           <ThumbsUp   size={24} onClick={() => upVotePost(postId)}       />
           <ThumbsDown size={24} onClick={() => downVotePost(postId)}     />
 

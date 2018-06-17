@@ -38,17 +38,17 @@ class PostCard extends Component {
     <div>
       {posts.map(i => {
         return(
-          <div class="ui card" style={postStyle} key={i.id}
+          <div className="ui card" style={postStyle} key={i.id}
               onClick={() => fetchCommentsById(i.id)}>
             <div className="content">
-              <i class="right floated like icon">{i.voteScore}</i>
-              <i class="ui avatar image"> {i.author} </i>
-              <div class="header">{i.title}</div>
-              <div class="description">
+              <i className="right floated like icon">{i.voteScore}</i>
+              <i className="ui avatar image"> {i.author} </i>
+              <div className="header">{i.title}</div>
+              <div className="description">
                 <p>{i.body}</p>
                 </div>
             </div>
-            <div class="extra content">
+            <div className="extra content">
                 <PostControl  postId={i.id} post={i}/>
             </div>
 

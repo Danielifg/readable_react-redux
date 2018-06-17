@@ -7,11 +7,26 @@ const headers = Request.headers;
  * Retrieve comment by Id
  * "comments.js/get"
  */
-export const getCommentById = (id) =>
-  fetch(`${Request.api}/posts/${id}/comments`, {headers})
-  .then(res => res.json())
+ export const getCommentById = (id) =>
+   fetch(`${Request.api}/posts/${id}/comments`, {headers})
+   .then(res => res.json())
+   // .then(function(response){
+   //   console.log(response.status)
+   //   if(response.status != 200){
+   //     console.log(response.status);
+   //     return;
+   //   }
+   //   response => response.json()
+   // })
+   //
 
 
+
+
+
+export const getCommentByCommentId = (id) =>
+    fetch(`${Request.api}/comments/${id}`, {headers})
+    .then(res => res.json())
 
 
 /**

@@ -3,15 +3,18 @@ import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import Trash from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import AddComment from 'react-icons/lib/md/control-point-duplicate';
+import IconButton from 'material-ui/IconButton';
+
 import { connect } from 'react-redux';
+
 
 import {
     deleteExistingComment,
     upVoteComment,
     downVoteComment,
     openEditCommentDialog,
-    openCommentDialog
+    openCommentDialog,
+    fetchCommentsById
 } from '../../actions'
 
  class CommentControl extends Component{
@@ -32,19 +35,19 @@ import {
   }
   return(
     <div style={pointer}>
-      <span class="left floated like">
-          <Trash size={24} onClick={() => deleteExistingComment(commentId,comment)} />
-          <EditIcon size={24} onClick={() => openEditCommentDialog(comment)} />
-      </span>
-      <span class="right floated star">
+      <span className="left floated like">
           <ThumbsUp   size={24} onClick={() => upVoteComment(commentId)}    />
           <ThumbsDown size={24} onClick={() => downVoteComment(commentId)}     />
-          <AddComment size={24} onClick={() => (openEditCommentDialog(comment))}    />
+      </span>
+      <span className="right floated star">
+          <EditIcon size={24} onClick={() => openEditCommentDialog(comment)} />
+          <Trash size={24} onClick={() => deleteExistingComment(commentId,comment)} />
       </span>
     </div>
   )
  }
 }
+
 function mapDispatchToProps(dispatch){
   return{
     deleteExistingComment:(commentId,comment) => dispatch(deleteExistingComment(commentId,comment)),
@@ -52,7 +55,6 @@ function mapDispatchToProps(dispatch){
     downVoteComment:(id) => dispatch(downVoteComment(id)),
     openEditCommentDialog: (comment) => dispatch(openEditCommentDialog(comment)),
     openCommentDialog:(comment) => dispatch(openEditCommentDialog(comment))
-
   }
 }
 export default connect(null, mapDispatchToProps)(CommentControl);
