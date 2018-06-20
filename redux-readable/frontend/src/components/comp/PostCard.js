@@ -21,7 +21,7 @@ class PostCard extends Component {
 
   render(){
     const timeAgo = TimeAgo();
-    const { posts,
+    const { post,
             deleteExistingPost,
             editExistingPost,
             upVotePost,
@@ -31,32 +31,24 @@ class PostCard extends Component {
           } = this.props;
     const postStyle ={
       cursor:'pointer',
-        margin:'0px auto'
+      margin:'0px auto'
     }
 
  return(
-    <div>
-      {posts.map(i => {
-        return(
-          <div className="ui card" style={postStyle} key={i.id}
-              onClick={() => fetchCommentsById(i.id)}>
+        <div className="ui card" style={postStyle} key={post.id}
+              onClick={() => fetchCommentsById(post.id)}>
             <div className="content">
-              <i className="right floated like icon">{i.voteScore}</i>
-              <i className="ui avatar image"> {i.author} </i>
-              <div className="header">{i.title}</div>
+              <i className="right floated like icon">{post.voteScore}</i>
+              <i className="ui avatar image"> {post.author} </i>
+              <div className="header">{post.title}</div>
               <div className="description">
-                <p>{i.body}</p>
+                <p>{post.body}</p>
                 </div>
             </div>
             <div className="extra content">
-                <PostControl  postId={i.id} post={i}/>
+                <PostControl  postId={post.id} post={post}/>
             </div>
-
-
-          </div>
-        );
-      })}
-      </div>
+        </div>
     )
   }
 }

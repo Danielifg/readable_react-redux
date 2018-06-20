@@ -6,21 +6,21 @@ import { fetchPosts } from '../../actions';
 import { connect } from 'react-redux';
 import CommentSection from './CommentSection';
 import PostCard from '../comp/PostCard'
-import { fetchCommentsById } from '../../actions'
+import { fetchCommentsById } from '../../actions';
+import { Route, withRouter } from 'react-router-dom';
+import CommentDetail from '../comp/CommentDetail';
 
 
 class PostSection extends Component{
-
- constructor(props){
-      super(props);
-        this.props.fetchPosts();
-    }
-
+componentDidMount(){this.props.fetchPosts();}
 render(){
+  const { posts } = this.props;
 
-      return(
+  return(
       <div>
-              <PostCard posts={ this.props.posts } />
+      {posts.map((post, index) => (
+                  <PostCard key={index} post={post} />
+              ))}
       </div>
     )
   }
@@ -41,4 +41,8 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(PostSection);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PostSection))

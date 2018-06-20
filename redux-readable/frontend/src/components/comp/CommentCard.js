@@ -3,34 +3,13 @@ import 'semantic-ui-css/semantic.min.css';
 import { fetchCommentsById } from '../../actions';
 import { connect } from 'react-redux';
 import CommentControl from '../controllers/CommentControl';
-import { Link } from 'react-router-dom';
-import Launch from 'react-icons/lib/md/launch';
+
 
 export default class CommentCard extends Component {
 render(){
   const {fixStyle, comments,commentId} = this.props
-
-
-
-function CardControl(props){
-    const id = props.id
-    if(props.commentId){
-      return(
-        <CommentControl/>
-      )
-    }else{
-      return(
-        <Link to={`/comments/${id}`}>
-            <Launch  size={24} />
-        </Link>
-      )
-    }
-  }
-
-function Card(props){
-  const comments = props.comments
-  const fixStyle = props.fixStyle
-  return(
+    return(
+      <div>
         <div key={comments.id} className="ui card" style={fixStyle}>
             <div className="content">
                 <div>{comments.author}</div>
@@ -46,30 +25,10 @@ function Card(props){
                                 </span>
                         </div>
                   <div className="extra content">
-                  {<CardControl commentId={commentId} id={comments.id}/>}
+                    <CommentControl/>
                   </div>
-          </div>)
-}
-
-
-function Content(props){
-  const comments = props.comments
-  const fixStyle = props.fixStyle
-  if(comments.length > 1){
-    return(
-      <div>
-      {comments.map(comments => (
-        <Card fixStyle={fixStyle} comments={comments}/>
-      ))}
+          </div>
       </div>
     )
-  }else {
-    return(<Card fixStyle={fixStyle} comments={comments}/>)
-  }
-}
-
-
-return(<Content  fixStyle={fixStyle} comments={comments}/>)
-
   }
 }

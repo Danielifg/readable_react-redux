@@ -6,6 +6,9 @@ import Trash from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import AddComment from 'react-icons/lib/md/control-point-duplicate';
 import Button from 'material-ui/Button';
+import Launch from 'react-icons/lib/md/launch';
+import { Link } from 'react-router-dom';
+
 import {
       deleteExistingPost,
       openEditPostDialog,
@@ -25,8 +28,9 @@ import {
             upVotePost,
             downVotePost,
             openPostDialog,
-            post
+            post,
         } = this.props
+  const { category } = post;
 
 const fabStyle = {
     margin: 0,
@@ -41,6 +45,9 @@ const fabStyle = {
   return(
     <div>
       <span className="left floated like">
+      <Link to={`/${category}/${postId}`}>
+          <Launch  size={24} />
+      </Link>
           <Trash size={24} onClick={() => deleteExistingPost(postId)} />
           <EditIcon size={24} onClick={() => openEditPostDialog(post)} />
       </span>

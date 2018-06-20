@@ -2,26 +2,33 @@ import { connect } from 'react-redux';
 import React, {Component} from 'react';
 import CommentCard from './CommentCard';
 import {openCommentDialog,
-        openEditCommentDialog } from '../../actions';
+        openEditCommentDialog,
+        closeCommentDialog } from '../../actions';
 import Button from 'material-ui/Button';
 import AddComment from 'react-icons/lib/md/control-point-duplicate';
 import {getCommentByCommentId} from '../../api/comments-RestClient'
+import CommentDialog from './CommentDialog';
 
 class CommentDetail extends Component{
   state = {
     comment:[]
   }
-  componentWillMount(){
+
+componentWillMount(){
     const { match:{ params:{commentId} } } = this.props
     getCommentByCommentId(commentId)
       .then(comment => {
         console.log(comment);
         this.setState({ comment : comment })
       })
-      console.log(this.state.comment)
   }
-  render(){
-    const { match:{ params:{commentId} }, openCommentDialog } = this.props
+
+render(){
+  console.log(this.props.match)
+    const { match:{ params:{commentId} },
+            openCommentDialog,
+            isCommentDialogOpen,
+            closeCommentDialog } = this.props
     const { comment } = this.state
       const fabStyle = {
           margin: 0,
@@ -42,22 +49,26 @@ class CommentDetail extends Component{
               onClick={openCommentDialog}>
                <AddComment size={24} />
           </Button>
+
+          <CommentDialog
+              open={isCommentDialogOpen}
+              onRequestClose={closeCommentDialog}/>
       </div>
     )
   }
 }
 
-function mapStateToProps ({ postDetail: { post }, categories: { categories },
-        comments},{  match: { params: { post_id }} }) {
+function mapStateToProps({commentDialog}){
     return {
-    comments:comments
+    isCommentDialogOpen:commentDialog.isOpen
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
     openCommentDialog:() => dispatch(openCommentDialog()),
-    openEditCommentDialog:() => dispatch(openEditCommentDialog())
+    openEditCommentDialog:() => dispatch(openEditCommentDialog()),
+    closeCommentDialog: () => dispatch(closeCommentDialog())
   }
 }
 

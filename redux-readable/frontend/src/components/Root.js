@@ -11,25 +11,12 @@ import 'semantic-ui-css/semantic.min.css';
 import Dialogs from './comp/Dialogs';
 import { Route, withRouter } from 'react-router-dom';
 import {getCommentById} from '../api/comments-RestClient';
-import CommentDetail from './comp/CommentDetail';
+import PostDetail from './comp/PostDetail';
+import {fetchCommentsById}  from  '../actions'
 
 
 class Root extends Component{
-
-  state={
-    initialComments:[]
-  }
-
-componentWillMount(){
-    getCommentById('8xf0y6ziyjabvozdd253nd')
-      .then( initialComments => {
-        console.log(initialComments.length)
-        this.setState({initialComments:initialComments});
-      })
-  }
-
 render(){
-    console.log(this.state.initialComments);
   const outline ={
     //border:'solid 1px black',
     float:'right',
@@ -47,8 +34,6 @@ render(){
   margin:'auto',
   width:'90%'
   }
-  //<FormDialog/>
-   const { initialComments } = this.state;
 
 return(
     <div>
@@ -70,16 +55,16 @@ return(
                 <CategorySection/>
             </RB.Col>
             <RB.Col xs={6} md={4} style={lines}>
-                <PostSection/>
+
           </RB.Col>
-          <RB.Col xsHidden md={4} style={lines}>
-              <CommentSection comments={initialComments}/>
+            <RB.Col xs={6} md={4} style={lines}>
+                <PostSection/>
           </RB.Col>
         </RB.Row>
       </div>
    )}/>
-
-   <Route exact path="/comments/:commentId"  component={CommentDetail}/>
+          <Route exact path="/:category" component={PostSection}/>
+          <Route exact path="/:category/:post_id" component={PostDetail}/>
   </div>
    )
   }

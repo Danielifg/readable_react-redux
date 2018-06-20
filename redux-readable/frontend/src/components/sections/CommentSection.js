@@ -6,6 +6,11 @@ import { fetchCommentsById } from '../../actions';
 
 
 class CommentSection extends Component {
+
+  componentDidUpdate(){
+    this.props.fetchCommentsById('8xf0y6ziyjabvozdd253nd')
+  }
+
 render(){
           const fixComment = {
               padding:'8px',
@@ -22,24 +27,24 @@ render(){
     )
   }
 }
-export default CommentSection
+//export default CommentSection
 
-// function mapStateToProps(state) {
-//     return {
-//         idForInitComments: state.posts.idForInitComments,
-//         isFetching: state.isFetching,
-//         data: state.data,
-//         error: state.error
-//       }
-//   }
-//
-// function mapDispatchToProps (dispatch) {
-//     return {
-//         fetchCommentsById: (id) => dispatch(fetchCommentsById(id))
-//     }
-// }
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps)
-//   (CommentSection);
+function mapStateToProps(state) {
+    return {
+        idForInitComments: state.posts.idForInitComments,
+        isFetching: state.isFetching,
+        data: state.data,
+        error: state.error
+      }
+  }
+
+function mapDispatchToProps (dispatch) {
+    return {
+        fetchCommentsById: (id) => dispatch(fetchCommentsById(id))
+    }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (CommentSection);
