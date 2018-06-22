@@ -38,7 +38,7 @@ import {
 }from './VoteAction'
 
 import {
-  fetchCommentsById,
+  fetchCommentsByPostId,
   createNewComment,
   editExistingComment,
   deleteExistingComment,
@@ -96,7 +96,7 @@ export {
   fetchCategories,
   fetchPosts,
   fetchPostsByCategory,
-  fetchCommentsById,
+  fetchCommentsByPostId,
   createNewComment,
   editExistingComment,
   deleteExistingComment,
@@ -110,7 +110,6 @@ export {
   downVotePost,
   upVoteComment,
   downVoteComment,
-
   OPEN_POST_DIALOG,
   CLOSE_POST_DIALOG,
   HANDLE_POST_DIALOG_CHANGE,

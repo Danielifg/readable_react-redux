@@ -6,6 +6,7 @@ import FaFullScreen from 'react-icons/lib/ti/arrow-maximise-outline';
 import { fetchPostsByCategory } from '../../actions';
 import { connect } from 'react-redux';
 import AddPost from 'react-icons/lib/md/control-point-duplicate';
+import OpenIcon from 'material-ui-icons/OpenInNew';
 
 
 
@@ -13,7 +14,8 @@ class CategoryCard extends Component {
 
 
   render(){
-      const { categories , fetchPostsByCategory} = this.props;
+      const { category , key} = this.props;
+      const { path } = this.props.category;
       const capitalizeFirst = (String) =>{
           return String.charAt(0).toUpperCase()+String.slice(1);
       }
@@ -22,28 +24,21 @@ class CategoryCard extends Component {
           margin:'0px auto'
       }
     return(
-
-          <div>
-              {categories.map(((category, i)=>(
-              <div style={categoryStyle} key={i}
+            <div style={categoryStyle} key={key}
                    onClick={() => fetchPostsByCategory(category.name)}
                    className="ui card">
-                          <div className="content">
+                      <div className="content">
                               <div>{capitalizeFirst(category.name)}</div>
-                        </div>
+                      </div>
                           <div className="extra content">
                             {category.path}
-                              <span className="right floated">
-                                  <AddPost
-                                   size={24} onClick={this.handleClickOpen} />
-                              </span>
-                        </div>
-                    </div>
-                  )))}
-                  <div>
-
-                  </div>
-          </div>
+                          <span className="right floated">
+                          <Link to={`/${path}`}>
+                                <OpenIcon />
+                            </Link>
+                          </span>
+                      </div>
+              </div>
     )
   }
 

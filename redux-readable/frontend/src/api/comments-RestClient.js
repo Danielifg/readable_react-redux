@@ -4,24 +4,20 @@ import uuid from 'uuid';
 const headers = Request.headers;
 
 /**
- * Retrieve comment by Id
+ * Retrieve comments of single
  * "comments.js/get"
  */
- export const getCommentById = (id) =>
+ export const getCommentsByPostId = (id) =>
    fetch(`${Request.api}/posts/${id}/comments`, {headers})
    .then(res => res.json())
-   // .then(function(response){
-   //   console.log(response.status)
-   //   if(response.status != 200){
-   //     console.log(response.status);
-   //     return;
-   //   }
-   //   response => response.json()
-   // })
-   //
-
-
-
+   .then(function(response){
+     console.log(response.status)
+     if(response.status != 200){
+       console.log(response.status);
+       return;
+     }
+     response => response.json()
+   })
 
 
 export const getCommentByCommentId = (id) =>

@@ -14,10 +14,17 @@ import {
       openEditPostDialog,
       upVotePost,
       downVotePost,
-      openPostDialog
+      openPostDialog,
+      fetchCommentsByPostId
     } from '../../actions'
 
  class PostControl extends Component{
+
+   componentDidUpdate(){
+     const {postId, fetchCommentsByPostId } = this.props
+     fetchCommentsByPostId(postId);
+     console.log(fetchCommentsByPostId(postId))
+   }
 
   render(){
 
@@ -42,7 +49,7 @@ const fabStyle = {
 };
 
 
-  return(
+return(
     <div>
       <span className="left floated like">
       <Link to={`/${category}/${postId}`}>
@@ -75,7 +82,8 @@ function mapDispatchToProps(dispatch){
     openEditPostDialog:(post) => dispatch(openEditPostDialog(post)),
     upVotePost:(id) => dispatch(upVotePost(id)),
     downVotePost:(id) => dispatch(downVotePost(id)),
-    openPostDialog:() => dispatch(openPostDialog())
+    openPostDialog:() => dispatch(openPostDialog()),
+    fetchCommentsByPostId:(id) => fetchCommentsByPostId(id)
   }
 }
 

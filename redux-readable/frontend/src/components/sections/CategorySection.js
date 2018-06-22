@@ -11,20 +11,20 @@ import { connect } from 'react-redux';
 
  class CategorySection  extends Component {
 
-
    componentDidMount(){
         this.props.fetchCategories();
     }
 
 render(){
-
-
-    const { selectPost } = this.props
-    const categories = this.props.categories || [];
+   const { selectPost, style } = this.props
+   const categories = this.props.categories || [];
+   console.log(categories)
    return(
-
-                <CategoryCard categories={categories} />
-    
+              <RB.Col xs={6} md={4} style={style}>
+                    {categories.map((category, i) => (
+                        <CategoryCard key={i} category={category} />
+                    ))}
+                </RB.Col>
     )
   }
 }
@@ -46,15 +46,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(CategorySection);
-
-
-//Array Logic
-// const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-// return {
-//   calendar: dayOrder.map((day) => ({
-//     day,
-//     meals: Object.keys(calendar[day]).reduce((meals, meal) => {
-//       meals[meal] = calendar[day][meal]
-//         ? food[calendar[day][meal]]
-//         : null
-//       return meals

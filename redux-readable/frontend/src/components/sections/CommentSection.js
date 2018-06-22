@@ -7,9 +7,7 @@ import { fetchCommentsById } from '../../actions';
 
 class CommentSection extends Component {
 
-  componentDidUpdate(){
-    this.props.fetchCommentsById('8xf0y6ziyjabvozdd253nd')
-  }
+
 
 render(){
           const fixComment = {
@@ -20,9 +18,7 @@ render(){
          comments.map(i =>{ console.log(i)})
   return(
         <div>
-            <CommentCard
-                fixStyle={fixComment}
-                comments={comments} />
+
        </div>
     )
   }
@@ -38,13 +34,7 @@ function mapStateToProps(state) {
       }
   }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        fetchCommentsById: (id) => dispatch(fetchCommentsById(id))
-    }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)
+  null)
   (CommentSection);

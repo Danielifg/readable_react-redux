@@ -11,6 +11,7 @@ import Button from 'material-ui/Button';
 import CommentIcon from 'material-ui-icons/Comment';
 
 class PostDetail extends Component {
+
     componentDidMount() {
         const {
             match: { params: { category, post_id }},
@@ -23,9 +24,10 @@ class PostDetail extends Component {
 
     render() {
         const {
-            post, categories, comments = [],
+            post, categories, comments=[],
             openCommentDialog
         } = this.props;
+        console.log(comments)
         const postDetailMarginFix={
           margin:'20px'
         }

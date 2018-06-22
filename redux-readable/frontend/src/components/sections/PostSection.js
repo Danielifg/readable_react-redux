@@ -11,8 +11,12 @@ import { Route, withRouter } from 'react-router-dom';
 import CommentDetail from '../comp/CommentDetail';
 
 
+
 class PostSection extends Component{
-componentDidMount(){this.props.fetchPosts();}
+  componentDidMount(){
+      this.props.fetchPosts();
+    }
+
 render(){
   const { posts } = this.props;
 
@@ -21,6 +25,7 @@ render(){
       {posts.map((post, index) => (
                   <PostCard key={index} post={post} />
               ))}
+
       </div>
     )
   }
