@@ -16,14 +16,14 @@ export const DELETE_COMMENT ='DELETE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 
 
-export const fetchCommentsByPostId = (id) => dispatch =>{
-   getCommentsByPostId(id)
-    .then(comments => dispatch({
-        type:FETCH_COMMENTS_SUCCESS,
-        payload:comments
-      })
-  )
-} ;
+export const fetchCommentsByPostId = (id) => dispatch => (
+ getCommentsByPostId(id)
+      .then((comments) => dispatch({
+         type:FETCH_COMMENTS_SUCCESS,
+         isFetching: false,
+         payload:comments
+     }))
+);
 
 
 

@@ -60,7 +60,6 @@ return (
               </RB.Row>
             </div>
          )}/>
-                <Route exact path="/:category" component={PostSection}/>
                 <Route exact path="/:category/:post_id" component={PostDetail}/>
         </div>
         );

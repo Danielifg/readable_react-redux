@@ -9,7 +9,6 @@ import UserIcon from 'react-icons/lib/md/account-circle';
 import TimeAgo from 'time-ago';
 
 import {
-  fetchCommentsByPostId,
   deleteExistingPost,
   upVotePost,
   downVotePost,
@@ -18,29 +17,23 @@ import {
 } from '../../actions';
 
 class PostCard extends Component {
-  componentDidMount() {
-      const { post: {id}, fetchCommentsByPostId } = this.props;
-      fetchCommentsByPostId(id);
-      console.log(id)
-  }
   render(){
+
     const timeAgo = TimeAgo();
-    const { post,
+    const { post, post:{id},
             deleteExistingPost,
             editExistingPost,
             upVotePost,
             downVotePost,
             createNewComment,
-            fetchCommentsById
           } = this.props;
     const postStyle ={
       cursor:'pointer',
       margin:'0px auto'
     }
-
+ console.log(id)
  return(
-        <div className="ui card" style={postStyle} key={post.id}
-              onClick={() => fetchCommentsByPostId(post.id)}>
+        <div className="ui card" style={postStyle} key={post.id}>
             <div className="content">
               <i className="right floated like icon">{post.voteScore}</i>
               <i className="ui avatar image"> {post.author} </i>
@@ -50,7 +43,7 @@ class PostCard extends Component {
                 </div>
             </div>
             <div className="extra content">
-                <PostControl  postId={post.id} post={post}/>
+                <PostControl postId={id} post={post}/>
             </div>
         </div>
     )
@@ -65,14 +58,9 @@ function mapStateToProps({posts}){
 }
 
 
-function mapDispatchToProps(dispatch){
-  return{
-    fetchCommentsByPostId:(id) => fetchCommentsByPostId(id)
-  }
-}
 
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(PostCard);

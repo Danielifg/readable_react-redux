@@ -9,6 +9,7 @@ import PostCard from './PostCard';
 import CommentCard from './CommentCard';
 import Button from 'material-ui/Button';
 import CommentIcon from 'material-ui-icons/Comment';
+import * as RB from 'react-bootstrap';
 
 class PostDetail extends Component {
 
@@ -24,10 +25,10 @@ class PostDetail extends Component {
 
     render() {
         const {
-            post, categories, comments=[],
+            post, categories, comments,
             openCommentDialog
         } = this.props;
-        console.log(comments)
+
         const postDetailMarginFix={
           margin:'20px'
         }
@@ -40,13 +41,23 @@ class PostDetail extends Component {
                     <div style={{postDetailMarginFix}}>
                         <PostCard
                             post={post}
-                            hideOpen={true}/>
-                        <br />
-                        <div style={{postCommentsMarginFix}}>
-                        {comments.map((comment, idx) => (
-                            <CommentCard key={idx} comments={comment}/>
-                        ))}
+                            postId={post_id}
+                            />
+
+                        <br/>
+
+                        <div>
+                        <RB.Grid>
+                               <RB.Row className="show-grid">
+                         {comments? comments.map((comment, idx) => (
+                            <RB.Col key={idx} xs={4} md={4}>
+                                  <CommentCard key={idx}  comments={comment} />
+                            </RB.Col>
+                          )):null}
+                        </RB.Row>
+                    </RB.Grid>
                         </div>
+
                         <Button
                             fab
                             style={fabStyle}
@@ -56,7 +67,11 @@ class PostDetail extends Component {
                             <CommentIcon />
                         </Button>
                     </div>
-                  ) : null;
+          ) : null;
+
+
+
+
         return ( <div> {Content} </div>);
     }
   }
@@ -75,7 +90,7 @@ function mapStateToProps ({ postDetail: { post }, categories: { categories },
     return {
         post,
         categories: categories.map(category => category.name),
-        comments: comments[post_id]
+        comments: comments.comments
     }
 }
 

@@ -4,8 +4,6 @@ import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import Trash from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import AddComment from 'react-icons/lib/md/control-point-duplicate';
-import Button from 'material-ui/Button';
 import Launch from 'react-icons/lib/md/launch';
 import { Link } from 'react-router-dom';
 
@@ -19,13 +17,6 @@ import {
     } from '../../actions'
 
  class PostControl extends Component{
-
-   componentDidUpdate(){
-     const {postId, fetchCommentsByPostId } = this.props
-     fetchCommentsByPostId(postId);
-     console.log(fetchCommentsByPostId(postId))
-   }
-
   render(){
 
   const {
@@ -36,25 +27,18 @@ import {
             downVotePost,
             openPostDialog,
             post,
+            fetchCommentsByPostId
         } = this.props
   const { category } = post;
-
-const fabStyle = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-};
-
-
+    console.log(postId)
 return(
     <div>
       <span className="left floated like">
-      <Link to={`/${category}/${postId}`}>
-          <Launch  size={24} />
-      </Link>
+               <Link to={`/${category}/${postId}`}>
+                      <Launch onClick={fetchCommentsByPostId(postId)}
+                       size={24} />
+                  </Link>
+
           <Trash size={24} onClick={() => deleteExistingPost(postId)} />
           <EditIcon size={24} onClick={() => openEditPostDialog(post)} />
       </span>
@@ -62,15 +46,6 @@ return(
           <ThumbsUp   size={24} onClick={() => upVotePost(postId)}       />
           <ThumbsDown size={24} onClick={() => downVotePost(postId)}     />
 
-
-                      <Button
-                        fab
-                        style={fabStyle}
-                        color="primary"
-                        aria-label="add"
-                        onClick={openPostDialog}>
-                        <AddComment size={24} />
-                    </Button>
       </span>
     </div>
   )
@@ -78,12 +53,11 @@ return(
 }
 function mapDispatchToProps(dispatch){
   return{
-    deleteExistingPost:(id) => dispatch(deleteExistingPost(id)),
-    openEditPostDialog:(post) => dispatch(openEditPostDialog(post)),
-    upVotePost:(id) => dispatch(upVotePost(id)),
-    downVotePost:(id) => dispatch(downVotePost(id)),
-    openPostDialog:() => dispatch(openPostDialog()),
-    fetchCommentsByPostId:(id) => fetchCommentsByPostId(id)
+    deleteExistingPost:(id)     => dispatch(deleteExistingPost(id)),
+    openEditPostDialog:(post)   => dispatch(openEditPostDialog(post)),
+    upVotePost:(id)             => dispatch(upVotePost(id)),
+    downVotePost:(id)           => dispatch(downVotePost(id)),
+    fetchCommentsByPostId:(id)  => dispatch(fetchCommentsByPostId(id))
   }
 }
 

@@ -7,8 +7,7 @@ import CommentControl from '../controllers/CommentControl';
 
 export default class CommentCard extends Component {
 render(){
-  const {fixStyle, comments, commentId} = this.props
-  console.log(this.props);
+  const {fixStyle, comments, comments:{id}} = this.props
     return(
       <div>
         <div key={comments.id} className="ui card" style={fixStyle}>
@@ -26,7 +25,7 @@ render(){
                                 </span>
                         </div>
                   <div className="extra content">
-                    <CommentControl/>
+                      <CommentControl comment={comments} commentId={id} />
                   </div>
           </div>
       </div>

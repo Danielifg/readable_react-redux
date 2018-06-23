@@ -29,7 +29,7 @@ import {
           openEditCommentDialog,
           openCommentDialog,
         } = this.props
-
+ console.log(commentId)
   const pointer ={
     cursor:'pointer'
   }
@@ -50,11 +50,11 @@ import {
 
 function mapDispatchToProps(dispatch){
   return{
-    deleteExistingComment:(commentId,comment) => dispatch(deleteExistingComment(commentId,comment)),
-    upVoteComment:(id) => dispatch(upVoteComment(id)),
-    downVoteComment:(id) => dispatch(downVoteComment(id)),
-    openEditCommentDialog: (comment) => dispatch(openEditCommentDialog(comment)),
-    openCommentDialog:(comment) => dispatch(openEditCommentDialog(comment))
+    deleteExistingComment:(id,comment)  => dispatch(deleteExistingComment(id,comment)),
+    upVoteComment:(id)                  => dispatch(upVoteComment(id)),
+    downVoteComment:(id)                => dispatch(downVoteComment(id)),
+    openEditCommentDialog: (comment)    => dispatch(openEditCommentDialog(comment)),
+    openCommentDialog:(comment)         => dispatch(openEditCommentDialog(comment))
   }
 }
 export default connect(null, mapDispatchToProps)(CommentControl);

@@ -9,15 +9,7 @@ const headers = Request.headers;
  */
  export const getCommentsByPostId = (id) =>
    fetch(`${Request.api}/posts/${id}/comments`, {headers})
-   .then(res => res.json())
-   .then(function(response){
-     console.log(response.status)
-     if(response.status != 200){
-       console.log(response.status);
-       return;
-     }
-     response => response.json()
-   })
+    .then(res => res.json())
 
 
 export const getCommentByCommentId = (id) =>
