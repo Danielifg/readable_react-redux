@@ -6,13 +6,13 @@ import Trash from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import Launch from 'react-icons/lib/md/launch';
 import { Link } from 'react-router-dom';
+import CommentIcon from 'material-ui-icons/Comment';
 
 import {
       deleteExistingPost,
       openEditPostDialog,
       upVotePost,
       downVotePost,
-      openPostDialog,
       fetchCommentsByPostId
     } from '../../actions'
 
@@ -25,12 +25,11 @@ import {
             openEditPostDialog,
             upVotePost,
             downVotePost,
-            openPostDialog,
             post,
-            fetchCommentsByPostId
+            fetchCommentsByPostId,
+            post:{commentCount}
         } = this.props
   const { category } = post;
-    console.log(postId)
 return(
     <div>
       <span className="left floated like">
@@ -41,11 +40,11 @@ return(
 
           <Trash size={24} onClick={() => deleteExistingPost(postId)} />
           <EditIcon size={24} onClick={() => openEditPostDialog(post)} />
+            <CommentIcon />{commentCount}
       </span>
       <span className="right floated star">
           <ThumbsUp   size={24} onClick={() => upVotePost(postId)}       />
           <ThumbsDown size={24} onClick={() => downVotePost(postId)}     />
-
       </span>
     </div>
   )

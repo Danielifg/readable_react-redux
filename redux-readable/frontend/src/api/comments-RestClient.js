@@ -52,10 +52,7 @@ export const getCommentByParent = (parentId) =>
            })
        }).then(res => res.json())
 
-/**
- * Add comment to db[]
- * "comments.js/vote"
- */
+//Votes
 export const voteComment = (id, option) =>
   fetch(`${Request.api}/comments/${id}`, {
     method: 'POST',

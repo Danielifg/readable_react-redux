@@ -18,13 +18,11 @@ componentWillMount(){
     const { match:{ params:{commentId} } } = this.props
     getCommentByCommentId(commentId)
       .then(comment => {
-        console.log(comment);
         this.setState({ comment : comment })
       })
   }
 
 render(){
-  console.log(this.props.match)
     const { match:{ params:{commentId} },
             openCommentDialog,
             isCommentDialogOpen,

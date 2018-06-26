@@ -2,31 +2,31 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PostDialog from './PostDialog';
 import CommentDialog from './CommentDialog';
-//import ToastMessage from './ToastMessage';
+
 
 import {
     closePostDialog,
     closeCommentDialog,
-    closeSnackbar
 } from '../../actions';
 
-// <ToastMessage
-//     open={isSnackbarOpen}
-//     onRequestClose={closeSnackbar}/>
+
 class Dialogs extends Component {
     render() {
         const {
-            isPostDialogOpen, isCommentDialogOpen, isSnackbarOpen,
-            closePostDialog, closeCommentDialog, closeSnackbar
+            isPostDialogOpen, isCommentDialogOpen,
+            closePostDialog, closeCommentDialog
         } = this.props;
         return (
             <div>
+
+
                 <PostDialog
                     open={isPostDialogOpen}
                     onRequestClose={closePostDialog}/>
                 <CommentDialog
                     open={isCommentDialogOpen}
                     onRequestClose={closeCommentDialog}/>
+
 
             </div>
         );
@@ -35,21 +35,18 @@ class Dialogs extends Component {
 
 function mapStateToProps ({
     postDialog: { openPostDialog: isPostDialogOpen },
-    commentDialog: { isOpen: isCommentDialogOpen },
-    snackbar: { isOpen: isSnackbarOpen}
+    commentDialog: { isOpen: isCommentDialogOpen }
     }) {
     return {
         isPostDialogOpen,
         isCommentDialogOpen,
-        isSnackbarOpen
     }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
         closePostDialog: () => dispatch(closePostDialog()),
-        closeCommentDialog: () => dispatch(closeCommentDialog()),
-        closeSnackbar: () => dispatch(closeSnackbar())
+        closeCommentDialog: () => dispatch(closeCommentDialog())
     }
 }
 

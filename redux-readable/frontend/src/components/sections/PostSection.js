@@ -29,7 +29,6 @@ render(){
       left: 'auto',
       position: 'fixed',
   };
- console.log(this.props.params)
   return(
       <div>
       {posts.map((post, index) => (

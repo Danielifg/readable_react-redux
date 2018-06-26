@@ -15,7 +15,6 @@ render(){
               margin:'0px auto'
             }
          const { comments } = this.props
-         comments.map(i =>{ console.log(i)})
   return(
         <div>
 

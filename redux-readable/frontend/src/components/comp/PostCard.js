@@ -31,11 +31,13 @@ class PostCard extends Component {
       cursor:'pointer',
       margin:'0px auto'
     }
- console.log(id)
+
  return(
         <div className="ui card" style={postStyle} key={post.id}>
             <div className="content">
-              <i className="right floated like icon">{post.voteScore}</i>
+              <i className="right floated like icon">
+                  {post.voteScore}
+              </i>
               <i className="ui avatar image"> {post.author} </i>
               <div className="header">{post.title}</div>
               <div className="description">

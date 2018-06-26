@@ -4,7 +4,6 @@ import posts from './PostsReducer'
 import comments from './CommentReducers'
 import postDialog from './PostDialogReducer'
 import postDetail from './PostDetailReducer'
-import snackbar from './SnackbarReducer'
 import commentDialog from './CommentDialogReducer'
 
 
@@ -14,6 +13,5 @@ import commentDialog from './CommentDialogReducer'
     comments,
     postDialog,
     postDetail,
-    snackbar,
     commentDialog
 });

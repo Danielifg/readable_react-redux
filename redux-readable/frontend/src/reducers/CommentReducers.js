@@ -19,11 +19,15 @@ const comments = (state = initialState, action) => {
 
         case 'FETCH_COMMENTS_SUCCESS':
         return {
-            ...state,
-            comments: action.payload,
-            isFetching: action.isFetching,
-                 error: null
-               };
+                ...state,
+                [action.id]: action.comments
+            }
+        // return {
+        //     ...state,
+        //     comments: action.payload,
+        //     isFetching: action.isFetching,
+        //          error: null
+        //        };
          case 'CREATE_COMMENT':
           let existingComments = state[action.comment.parentId] || [];
           return {
@@ -44,19 +48,15 @@ const comments = (state = initialState, action) => {
                           })
                   }
               case 'DELETE_COMMENT':
-                  existingComments = state[action.postId] || []
-                  return {
-                      ...state,
-                      [action.postId]: existingComments
-                    }
-                    default:
-                        return state;
+              existingComments = state[action.postId] || []
+                return {
+                    ...state,
+                  [action.postId]: existingComments.filter(comment => comment.id !== action.id)
+                }
+                default:
+                  return state;
           };
 }
-const initialState = {
-    comments:null,
-    isFetching:false,
-    error:null
-  };
+const initialState = {}
 
 export default comments;

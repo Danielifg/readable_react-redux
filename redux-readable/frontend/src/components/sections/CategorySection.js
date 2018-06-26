@@ -18,7 +18,6 @@ import { connect } from 'react-redux';
 render(){
    const { selectPost, style } = this.props
    const categories = this.props.categories || [];
-   console.log(categories)
    return(
               <RB.Col xs={6} md={4} style={style}>
                     {categories.map((category, i) => (

@@ -10,6 +10,10 @@ import CommentCard from './CommentCard';
 import Button from 'material-ui/Button';
 import CommentIcon from 'material-ui-icons/Comment';
 import * as RB from 'react-bootstrap';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
 
 class PostDetail extends Component {
 
@@ -24,36 +28,42 @@ class PostDetail extends Component {
     }
 
     render() {
+
+
         const {
             post, categories, comments,
             openCommentDialog
         } = this.props;
 
+
+
         const postDetailMarginFix={
           margin:'20px'
         }
         const postCommentsMarginFix ={
-          margin:'0px auto'
+          padding:'10px',
+          width: '60%',
+          marginLeft:'0px auto',
+
         }
+
         const {match: { params: { category, post_id }}} = this.props;
         const Content = categories.includes(category) &&
             post && post.id && post.id === post_id?(
-                    <div style={{postDetailMarginFix}}>
+                    <div>
                         <PostCard
                             post={post}
                             postId={post_id}
                             />
-
                         <br/>
-
                         <div>
-                        <RB.Grid>
-                               <RB.Row className="show-grid">
-                         {comments? comments.map((comment, idx) => (
-                            <RB.Col key={idx} xs={4} md={4}>
-                                  <CommentCard key={idx}  comments={comment} />
-                            </RB.Col>
-                          )):null}
+                    <RB.Grid style={postCommentsMarginFix}>
+                       <RB.Row className="show-grid" >
+                      {comments? comments.map((comment, idx) => (
+                                  <RB.Col  xs={6} md={4}>
+                                    <CommentCard key={idx}  comments={comment} />
+                                  </RB.Col>
+                        )):null}
                         </RB.Row>
                     </RB.Grid>
                         </div>
@@ -63,7 +73,7 @@ class PostDetail extends Component {
                             style={fabStyle}
                             color="primary"
                             aria-label="add"
-                            onClick={openCommentDialog}>
+                            onClick={() => openCommentDialog}>
                             <CommentIcon />
                         </Button>
                     </div>
@@ -90,7 +100,7 @@ function mapStateToProps ({ postDetail: { post }, categories: { categories },
     return {
         post,
         categories: categories.map(category => category.name),
-        comments: comments.comments
+        comments: comments[post_id]
     }
 }
 

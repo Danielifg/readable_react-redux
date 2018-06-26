@@ -21,7 +21,7 @@ import {
 
   render(){
   const {
-          comment,
+          comment, comment:{ id, parentId },
           commentId,
           deleteExistingComment,
           upVoteComment,
@@ -29,7 +29,7 @@ import {
           openEditCommentDialog,
           openCommentDialog,
         } = this.props
- console.log(commentId)
+ 
   const pointer ={
     cursor:'pointer'
   }
@@ -41,7 +41,7 @@ import {
       </span>
       <span className="right floated star">
           <EditIcon size={24} onClick={() => openEditCommentDialog(comment)} />
-          <Trash size={24} onClick={() => deleteExistingComment(commentId,comment)} />
+          <Trash size={24} onClick={() => deleteExistingComment(commentId,parentId)} />
       </span>
     </div>
   )
@@ -50,7 +50,7 @@ import {
 
 function mapDispatchToProps(dispatch){
   return{
-    deleteExistingComment:(id,comment)  => dispatch(deleteExistingComment(id,comment)),
+    deleteExistingComment:(id,postId)  => dispatch(deleteExistingComment(id,postId)),
     upVoteComment:(id)                  => dispatch(upVoteComment(id)),
     downVoteComment:(id)                => dispatch(downVoteComment(id)),
     openEditCommentDialog: (comment)    => dispatch(openEditCommentDialog(comment)),
